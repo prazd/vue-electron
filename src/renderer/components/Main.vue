@@ -4,7 +4,7 @@
 
 
 
-<div class="chunky1"><a href="/">Выход</a></div>
+<a href="/" class="bot1">Выход</a>
 
 <div class="block">
 Номинальное напряжение питания <br>{{U}} % Uном
@@ -109,9 +109,10 @@ export default {
   },
   methods:{
       Run(){
-        this.info = ""
-        this.status = false
-        if(this.U===100 && this.kVt ===3 && this.I === 7 && this.V===5000 &&  this.Gz ===450){
+        if(this.status===true){
+          this.info = "Ворота и так открыты!"
+        }
+        else if(this.U===100 && this.kVt ===3 && this.I === 7 && this.V===5000 &&  this.Gz ===450){
           this.status = true
           this.info = "Ворота открыты!"
         }else{
@@ -119,8 +120,13 @@ export default {
         }
       },
       Close(){
-        this.info = "Ворота закрылись"
-        this.status = false
+        if(this.status===false){
+          this.info = "Ворота и так закрыты"
+        }else{
+            this.info = "Ворота закрылись"
+            this.status = false
+        }
+
       }
   }
 }
@@ -144,5 +150,66 @@ export default {
 }
 .block {
 margin-left: 100px;
+}
+
+/*Button Exit*/
+a.bot1{
+    background:linear-gradient(to bottom, #FFFFFF, #E6E6E6) #F5F5F5 repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #B3B3B3;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333333;
+        text-decoration:none;
+    display:block;
+    font-size: 14px;
+        width:120px;
+    line-height: 20px;
+    margin: 20px auto;
+    padding: 4px 12px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+a.bot1:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform, opacity;
+  transition-property: transform, opacity;
+}
+
+a.bot1:hover {
+  -webkit-transform: translateY(-5px);
+  -ms-transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+a.bot1:hover:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  -ms-transform: translateY(5px);
+  transform: translateY(5px);
 }
 </style> 
